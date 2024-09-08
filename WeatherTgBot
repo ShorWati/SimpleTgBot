@@ -1,0 +1,23 @@
+import telebot
+import requests
+import json
+
+bot = telebot.TeleBot('7523701435:AAHDzoYdnioRRpj8397417oFe_7K5aG_kyg')
+API = '85616668d51cfb442b37bf6427f2f837'
+
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    bot.send_message(message.chat.id, 'Hello! Write your city')
+
+
+@bot.message_handler(content_types=['text'])
+def get_weather(message):
+    city = message.text.strip().lower()
+    res = requests.get(
+        f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API}&units=metric')
+    data = json.loads(res.text)
+    bot.reply_to(message, f'Weather now: {data["main"]["temp"]}' '°C')
+
+
+bot.polling(none_stop=True)
