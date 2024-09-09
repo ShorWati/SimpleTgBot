@@ -3,7 +3,7 @@ import requests
 import json
 
 bot = telebot.TeleBot('Bot token') #bot token from BotFather
-API = '85616668d51cfb442b37bf6427f2f837'
+API = '85616668d51cfb442b37bf6427f2f837' #your API from https://openweathermap.org/
 
 
 @bot.message_handler(commands=['start'])
